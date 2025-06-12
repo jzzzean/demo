@@ -1,4 +1,4 @@
-package com.jzzzean;
+package com.testrun;
 
 import opennlp.tools.sentdetect.*;
 import opennlp.tools.tokenize.*;
@@ -52,13 +52,13 @@ public class TestRun {
     public void processText(String text) {
         System.out.println("\n--- text processing: " + text + " ---");
 
-        // 1. 斷句
+        // 1. sentence chopping
         String[] sentences = sentenceDetector.sentDetect(text);
         System.out.println("Sentences: :");
         Arrays.stream(sentences).forEach(s -> System.out.println("  - " + s));
 
         for (String sentence : sentences) {
-            // 2. 斷詞
+            // 2. tokenization
             String[] tokens = tokenizer.tokenize(sentence);
             System.out.println("\n  Tokenization results (" + sentence + "):");
             Arrays.stream(tokens).forEach(t -> System.out.print(t + " | "));
@@ -72,8 +72,7 @@ public class TestRun {
             }
             System.out.println();
 
-            // 4. Lemma (詞形還原)
-            // LemmatizerME 的 lemmatize 方法也接受 String[] tokens 和 String[] tags
+            // 4. Lemma
             String[] lemmas = lemmatizer.lemmatize(tokens, tags);
             System.out.println("  Lemmas results:");
             for (int i = 0; i < tokens.length; i++) {
